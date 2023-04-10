@@ -6,7 +6,6 @@ import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Loader from './Loader/Loader';
 import Button from './Button/Button';
-import Modal from './Modal/Modal';
 
 class App extends Component {
   static propTypes = { searchQuery: PropTypes.string };
@@ -15,8 +14,6 @@ class App extends Component {
     page: 1,
     images: [],
     status: 'idle',
-    selectedImage: null,
-    tags: null,
   };
 
   async componentDidUpdate(prevProps, prevState) {
@@ -41,17 +38,6 @@ class App extends Component {
     this.setState({ searchQuery, page: 1, images: [] });
   };
 
-  onCloseModal = () => {
-    this.setState({
-      selectedImage: null,
-      tags: null,
-    });
-  };
-
-  showImage = (largeImageUrl, tags) => {
-    this.setState({ selectedImage: largeImageUrl, tags: tags });
-  };
-
   onLoadMore = () => {
     this.setState(prevState => ({
       page: prevState.page + 1,
@@ -59,7 +45,7 @@ class App extends Component {
   };
 
   render() {
-    const { images, status, selectedImage, tags } = this.state;
+    const { images, status } = this.state;
     return (
       <div className={css.app}>
         <Searchbar onSubmit={this.handleFormSubmit} />
@@ -67,13 +53,6 @@ class App extends Component {
         {status === 'rejected' && <h1> Sorry something went wrong</h1>}
         <ImageGallery images={images} showImage={this.showImage} />
         {images.length > 0 && <Button onClick={this.onLoadMore} />}
-        {selectedImage && (
-          <Modal
-            selectedImage={selectedImage}
-            tags={tags}
-            onClose={this.onCloseModal}
-          />
-        )}
       </div>
     );
   }

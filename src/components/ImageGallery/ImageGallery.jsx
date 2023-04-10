@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import css from './ImageGallery.module.css';
 import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 
-function ImageGallery({ images, showImage }) {
+function ImageGallery({ images }) {
   return (
     <ul className={css.gallery}>
       {images.map(image => (
@@ -11,7 +11,6 @@ function ImageGallery({ images, showImage }) {
           tags={image.tags}
           webformatURL={image.webformatURL}
           largeImageURL={image.largeImageURL}
-          showImage={() => showImage(image.largeImageURL, image.tags)}
         />
       ))}
     </ul>
@@ -20,7 +19,6 @@ function ImageGallery({ images, showImage }) {
 
 ImageGallery.propTypes = {
   items: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string.isRequired)),
-  showImage: PropTypes.func.isRequired,
 };
 
 export default ImageGallery;

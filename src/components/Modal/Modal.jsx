@@ -7,7 +7,7 @@ const modalRoot = document.querySelector('#modal-root');
 
 export default class Modal extends Component {
   static propTypes = {
-    selectedImage: PropTypes.string.isRequired,
+    largeImageURL: PropTypes.string.isRequired,
     tags: PropTypes.string.isRequired,
     onClose: PropTypes.func.isRequired,
   };
@@ -27,12 +27,12 @@ export default class Modal extends Component {
   };
 
   render() {
-    const { selectedImage, tags } = this.props;
+    const { largeImageURL, tags } = this.props;
 
     return createPortal(
       <div className={css.overlay} onClick={this.handleKeyDown}>
         <div className={css.modal}>
-          <img src={selectedImage} alt={tags} />
+          <img src={largeImageURL} alt={tags} />
         </div>
       </div>,
       modalRoot
