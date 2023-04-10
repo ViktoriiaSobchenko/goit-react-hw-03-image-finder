@@ -27,9 +27,7 @@ class App extends Component {
           status: 'resolved',
         }));
       } catch (error) {
-        this.setState(error => this.setState({ error, status: 'rejected' }));
-      } finally {
-        this.setState({ isLoading: false });
+        this.setState({ error, status: 'rejected' });
       }
     }
   }
